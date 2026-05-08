@@ -148,36 +148,62 @@
             background: var(--bg-input);
             color: var(--text-primary);
         }
-        .estampado-inputs {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 10px;
-            align-items: center;
-            padding: 10px;
+        .estampados-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .estampado-block {
             background: var(--bg-input);
             border-radius: 8px;
-            margin-bottom: 10px;
+            padding: 12px 15px;
+            min-width: 180px;
+            flex: 1;
         }
-        .estampado-inputs label {
-            margin: 0;
-            font-size: 0.9rem;
+        .estampado-block-title {
+            font-weight: 700;
+            color: var(--section-color);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--section-color);
         }
-        .estampado-inputs input {
-            width: 100%;
-            padding: 8px;
+        .estampado-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .estampado-row:last-child { margin-bottom: 0; }
+        .estampado-row-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            min-width: 45px;
+        }
+        .estampado-row input[type="number"] {
+            width: 80px;
+            padding: 6px 8px;
             border: 1px solid var(--border-input);
             border-radius: 5px;
             font-size: 0.9rem;
-            background: var(--bg-input);
+            background: var(--bg-card);
             color: var(--text-primary);
-        }
-        .area-display {
             text-align: center;
-            font-weight: bold;
+        }
+        .estampado-row input[type="number"]:focus {
+            outline: none;
+            border-color: var(--section-color);
+        }
+        .estampado-row .area-display {
+            font-weight: 700;
             color: var(--area-text);
-            padding: 8px;
+            font-size: 0.9rem;
+            padding: 4px 10px;
             background: var(--area-bg);
             border-radius: 5px;
+            min-width: 50px;
+            text-align: center;
         }
         .results-grid {
             display: grid;
@@ -244,12 +270,6 @@
             border-bottom: 2px solid var(--section-color);
         }
         .full-width { grid-column: 1 / -1; }
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-            .results-grid { grid-template-columns: 1fr; }
-            .estampado-inputs { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.8rem; }
-        }
         .info-box {
             background: var(--bg-info);
             border-left: 4px solid #2196F3;
@@ -428,6 +448,122 @@
         }
         .items-header span:nth-child(1) { flex: 2; }
         .items-header span:nth-child(2) { flex: 1; }
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 15px;
+        }
+        .dm { display: none; }
+        .dt { display: table-cell; }
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .results-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+            .container { padding: 0 5px; }
+            body { padding: 10px; }
+            .card { padding: 15px; }
+            .config-grid { grid-template-columns: 1fr 1fr; }
+            .phone-input-group { flex-direction: column; }
+            .phone-input-group select { width: 100%; }
+            .items-header { display: none; }
+            .item-pedido { flex-wrap: wrap; }
+            .item-pedido select { flex: 1 1 100%; }
+            .item-pedido input[type="number"] { flex: 1; }
+            .btn-eliminar { flex: 0 0 auto; }
+            .table-wrapper { overflow-x: auto; }
+            .dt { display: none; }
+            .dm { display: table-cell; }
+            thead { display: none; }
+            tbody {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            tr { display: block; margin: 0; border: none; padding: 0; background: transparent; }
+            td.dm { display: block; padding: 0; border: none; }
+            .remera-card {
+                background: var(--bg-table);
+                border: 1px solid var(--border-card);
+                border-radius: 10px;
+                padding: 12px;
+                margin-bottom: 0;
+            }
+            .remera-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+                margin-bottom: 8px;
+                padding-bottom: 6px;
+            }
+            .remera-card-id {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                font-weight: 700;
+                font-size: 0.7rem;
+                padding: 2px 6px;
+                border-radius: 4px;
+            }
+            .remera-card-name {
+                font-weight: 600;
+                font-size: 0.8rem;
+                color: var(--text-primary);
+                line-height: 1.2;
+            }
+            .remera-card-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+            .remera-card-field {
+                padding: 5px 6px;
+                background: var(--bg-config);
+                border-radius: 6px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .remera-card-field .rc-label {
+                font-size: 0.7rem;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 0.3px;
+                margin-bottom: 0;
+            }
+            .remera-card-field .rc-value {
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: var(--text-primary);
+            }
+            .remera-card-field.rc-highlight {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+            .remera-card-field.rc-highlight .rc-label,
+            .remera-card-field.rc-highlight .rc-value {
+                color: white;
+            }
+            .remera-card-field.rc-ganancia {
+                background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            }
+            .remera-card-field.rc-ganancia .rc-label,
+            .remera-card-field.rc-ganancia .rc-value {
+                color: white;
+            }
+            .remera-card .costo-input {
+                width: 100%;
+                margin-top: 2px;
+            }
+            .estampados-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+            .estampado-block { min-width: unset; padding: 12px 10px; border: 1px solid var(--border-card); }
+            .estampado-block-title { font-size: 0.95rem; margin-bottom: 8px; padding-bottom: 5px; }
+            .estampado-row { margin-bottom: 6px; }
+            .estampado-row-label { font-size: 0.9rem; min-width: 45px; }
+            .estampado-row input[type="number"] { width: 70px; padding: 6px 8px; font-size: 0.95rem; }
+            .estampado-row .area-display { font-size: 0.95rem; padding: 4px 10px; }
+            .total-box { font-size: 0.9rem; padding: 15px; }
+            .total-box div:last-child { font-size: 1.4rem !important; }
+            .result-value { font-size: 1.2rem; }
+            .edit-btn { font-size: 0.75rem; padding: 6px 10px; }
+        }
     </style>
 </head>
 <body>
@@ -594,46 +730,86 @@
             <h2>Estampados (Dimensiones en cm)</h2>
             <p style="color: var(--text-muted); margin-bottom: 15px;">Ingresa el ancho y largo de cada estampado. El area se calcula automaticamente.</p>
             
-            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 10px; font-weight: bold; color: var(--items-header-color); padding: 0 10px; margin-bottom: 10px;">
-                <div>Ubicacion</div>
-                <div>Ancho (cm)</div>
-                <div>Largo (cm)</div>
-                <div>Area (cm2)</div>
-            </div>
-            
-            <div class="estampado-inputs">
-                <label>Pecho</label>
-                <input type="number" id="pechoAncho" value="28" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
-                <input type="number" id="pechoLargo" value="23" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
-                <div class="area-display" id="pechoArea">644</div>
-            </div>
-            
-            <div class="estampado-inputs">
-                <label>Espalda</label>
-                <input type="number" id="espaldaAncho" value="28" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
-                <input type="number" id="espaldaLargo" value="24" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
-                <div class="area-display" id="espaldaArea">672</div>
-            </div>
-            
-            <div class="estampado-inputs">
-                <label>Manga Izquierda</label>
-                <input type="number" id="mangaIzqAncho" value="12" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
-                <input type="number" id="mangaIzqLargo" value="8" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
-                <div class="area-display" id="mangaIzqArea">96</div>
-            </div>
-            
-            <div class="estampado-inputs">
-                <label>Manga Derecha</label>
-                <input type="number" id="mangaDerAncho" value="12" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
-                <input type="number" id="mangaDerLargo" value="8" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
-                <div class="area-display" id="mangaDerArea">96</div>
-            </div>
-            
-            <div class="estampado-inputs">
-                <label>Extra (opcional)</label>
-                <input type="number" id="extraAncho" value="0" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
-                <input type="number" id="extraLargo" value="0" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
-                <div class="area-display" id="extraArea">0</div>
+            <div class="estampados-grid">
+                <div class="estampado-block">
+                    <div class="estampado-block-title">Pecho</div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Ancho</span>
+                        <input type="number" id="pechoAncho" value="0" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
+                    </div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Largo</span>
+                        <input type="number" id="pechoLargo" value="0" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
+                    </div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Area</span>
+                        <div class="area-display" id="pechoArea">0</div>
+                    </div>
+                </div>
+                
+                <div class="estampado-block">
+                    <div class="estampado-block-title">Espalda</div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Ancho</span>
+                        <input type="number" id="espaldaAncho" value="0" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
+                    </div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Largo</span>
+                        <input type="number" id="espaldaLargo" value="0" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
+                    </div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Area</span>
+                        <div class="area-display" id="espaldaArea">0</div>
+                    </div>
+                </div>
+                
+                <div class="estampado-block">
+                    <div class="estampado-block-title">Manga Izquierda</div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Ancho</span>
+                        <input type="number" id="mangaIzqAncho" value="0" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
+                    </div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Largo</span>
+                        <input type="number" id="mangaIzqLargo" value="0" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
+                    </div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Area</span>
+                        <div class="area-display" id="mangaIzqArea">0</div>
+                    </div>
+                </div>
+                
+                <div class="estampado-block">
+                    <div class="estampado-block-title">Manga Derecha</div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Ancho</span>
+                        <input type="number" id="mangaDerAncho" value="0" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
+                    </div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Largo</span>
+                        <input type="number" id="mangaDerLargo" value="0" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
+                    </div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Area</span>
+                        <div class="area-display" id="mangaDerArea">0</div>
+                    </div>
+                </div>
+                
+                <div class="estampado-block">
+                    <div class="estampado-block-title">Extra (opcional)</div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Ancho</span>
+                        <input type="number" id="extraAncho" value="0" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
+                    </div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Largo</span>
+                        <input type="number" id="extraLargo" value="0" min="0" onkeydown="soloNumeros(event)" onchange="calcularTodo()">
+                    </div>
+                    <div class="estampado-row">
+                        <span class="estampado-row-label">Area</span>
+                        <div class="area-display" id="extraArea">0</div>
+                    </div>
+                </div>
             </div>
             
             <div class="total-box">
@@ -658,34 +834,38 @@
             </div>
             
             <h3 class="section-title">Remeras PUBLICITARIAS</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tipo</th>
-                        <th>Costo</th>
-                        <th>DTF</th>
-                        <th>Precio Venta</th>
-                        <th>Ganancia</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaPublic"></tbody>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tipo</th>
+                            <th>Costo</th>
+                            <th>DTF</th>
+                            <th>Precio Venta</th>
+                            <th>Ganancia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPublic"></tbody>
+                </table>
+            </div>
             
             <h3 class="section-title">Remeras PREMIUM</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tipo</th>
-                        <th>Costo</th>
-                        <th>DTF</th>
-                        <th>Precio Venta</th>
-                        <th>Ganancia</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaPremium"></tbody>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tipo</th>
+                            <th>Costo</th>
+                            <th>DTF</th>
+                            <th>Precio Venta</th>
+                            <th>Ganancia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPremium"></tbody>
+                </table>
+            </div>
         </div>
     </div>
     
@@ -729,7 +909,7 @@
         let modoEdicionCostos = false;
         let contadorItems = 0;
         
-        function agregarItem(tipoId = 1, cantidad = 10) {
+        function agregarItem(tipoId = 1, cantidad = 1) {
             contadorItems++;
             const container = document.getElementById('itemsPedido');
             const div = document.createElement('div');
@@ -942,16 +1122,42 @@
                 
                 const costoCell = modoEdicionCostos 
                     ? `<input type="number" class="costo-input" value="${r.costo}" min="0" onkeydown="soloNumeros(event)" onchange="actualizarCosto('public', ${index}, this.value)">`
-                    : `${formatMoney(r.costo)}`;
+                    : formatMoney(r.costo);
                 
                 const row = `
                     <tr>
-                        <td><strong>${r.id}</strong></td>
-                        <td>${r.nombre}</td>
-                        <td>${costoCell}</td>
-                        <td>${formatMoney(precioDtf)}</td>
-                        <td><strong style="color: var(--section-color);">${formatMoney(precioVenta)}</strong></td>
-                        <td style="color: #38ef7d; font-weight: bold;">${formatMoney(ganancia)}</td>
+                        <td class="dt"><strong>${r.id}</strong></td>
+                        <td class="dt">${r.nombre}</td>
+                        <td class="dt">${costoCell}</td>
+                        <td class="dt">${formatMoney(precioDtf)}</td>
+                        <td class="dt"><strong style="color: var(--section-color);">${formatMoney(precioVenta)}</strong></td>
+                        <td class="dt" style="color: #38ef7d; font-weight: bold;">${formatMoney(ganancia)}</td>
+                        <td class="dm" colspan="6">
+                            <div class="remera-card">
+                                <div class="remera-card-header">
+                                    <span class="remera-card-id">${r.id}</span>
+                                    <span class="remera-card-name">${r.nombre}</span>
+                                </div>
+                                <div class="remera-card-grid">
+                                    <div class="remera-card-field">
+                                        <div class="rc-label">Costo</div>
+                                        <div class="rc-value">${costoCell}</div>
+                                    </div>
+                                    <div class="remera-card-field">
+                                        <div class="rc-label">DTF</div>
+                                        <div class="rc-value">${formatMoney(precioDtf)}</div>
+                                    </div>
+                                    <div class="remera-card-field rc-highlight">
+                                        <div class="rc-label">Precio Venta</div>
+                                        <div class="rc-value">${formatMoney(precioVenta)}</div>
+                                    </div>
+                                    <div class="remera-card-field rc-ganancia">
+                                        <div class="rc-label">Ganancia</div>
+                                        <div class="rc-value">${formatMoney(ganancia)}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 `;
                 tbodyPublic.innerHTML += row;
@@ -972,16 +1178,42 @@
                 
                 const costoCell = modoEdicionCostos 
                     ? `<input type="number" class="costo-input" value="${r.costo}" min="0" onkeydown="soloNumeros(event)" onchange="actualizarCosto('premium', ${index}, this.value)">`
-                    : `${formatMoney(r.costo)}`;
+                    : formatMoney(r.costo);
                 
                 const row = `
                     <tr>
-                        <td><strong>${r.id}</strong></td>
-                        <td>${r.nombre}</td>
-                        <td>${costoCell}</td>
-                        <td>${formatMoney(precioDtf)}</td>
-                        <td><strong style="color: var(--section-color);">${formatMoney(precioVenta)}</strong></td>
-                        <td style="color: #38ef7d; font-weight: bold;">${formatMoney(ganancia)}</td>
+                        <td class="dt"><strong>${r.id}</strong></td>
+                        <td class="dt">${r.nombre}</td>
+                        <td class="dt">${costoCell}</td>
+                        <td class="dt">${formatMoney(precioDtf)}</td>
+                        <td class="dt"><strong style="color: var(--section-color);">${formatMoney(precioVenta)}</strong></td>
+                        <td class="dt" style="color: #38ef7d; font-weight: bold;">${formatMoney(ganancia)}</td>
+                        <td class="dm" colspan="6">
+                            <div class="remera-card">
+                                <div class="remera-card-header">
+                                    <span class="remera-card-id">${r.id}</span>
+                                    <span class="remera-card-name">${r.nombre}</span>
+                                </div>
+                                <div class="remera-card-grid">
+                                    <div class="remera-card-field">
+                                        <div class="rc-label">Costo</div>
+                                        <div class="rc-value">${costoCell}</div>
+                                    </div>
+                                    <div class="remera-card-field">
+                                        <div class="rc-label">DTF</div>
+                                        <div class="rc-value">${formatMoney(precioDtf)}</div>
+                                    </div>
+                                    <div class="remera-card-field rc-highlight">
+                                        <div class="rc-label">Precio Venta</div>
+                                        <div class="rc-value">${formatMoney(precioVenta)}</div>
+                                    </div>
+                                    <div class="remera-card-field rc-ganancia">
+                                        <div class="rc-label">Ganancia</div>
+                                        <div class="rc-value">${formatMoney(ganancia)}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 `;
                 tbodyPremium.innerHTML += row;
@@ -1000,7 +1232,7 @@
         
         // Inicializar
         window.onload = function() {
-            agregarItem(1, 10);
+            agregarItem(1, 1);
             if (localStorage.getItem('theme') === 'dark') {
                 document.body.classList.add('dark-mode');
                 document.querySelector('.theme-toggle').textContent = '☀️';
